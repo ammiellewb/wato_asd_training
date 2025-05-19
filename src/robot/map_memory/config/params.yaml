@@ -1,3 +1,15 @@
-# map_memory_node:
-#   ros__parameters:
-    
+map_memory_node:
+  ros__parameters:
+    map_pub_rate: 3000 # ms, rate at which the map is published
+    distance_threshold_meters: 1.5 # m, distance at which the map is updated
+    global_map:
+      resolution: 0.5
+      width: 60
+      height: 60
+
+      origin:
+        position:
+          x: -15.0
+          y: -15.0
+        orientation:
+          w: 1.0

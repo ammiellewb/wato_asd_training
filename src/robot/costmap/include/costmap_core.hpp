@@ -13,29 +13,31 @@ class CostmapCore {
     // Constructor, we pass in the node's RCLCPP logger to enable logging to terminal
     explicit CostmapCore(const rclcpp::Logger& logger);
 
-    bool in_grid(int grid_x, int grid_y);
-
+    // Initialize the costmap with given parameters in params.yaml
     void initializeCostmap(double resolution, int width, int height, 
       const geometry_msgs::msg::Pose origin, double inflation_radius, int max_cost);
       
-    void processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr& scan);
+    // Update the costmap with new laser scan data
+    void processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr& laser_scan) const;
+    void convertToGrid(double x, double y, int& grid_x, int& grid_y);
+    bool in_grid(int grid_x, int grid_y);
+    void markObstacle(int grid_x, int grid_y);
 
-    std::shared_ptr<nav_msgs::msg::OccupancyGrid> publishCostmap() const;
+    // Inflate the obstacles in the costmap which are within the inflation radius
+    void inflateObstacles(int origin_x, int origin_y) const;
+
+    // Publish the costmap to a topic
+    nav_msgs::msg::OccupancyGrid::SharedPtr publishCostmap() const;
 
   private:
     rclcpp::Logger logger_;
 
     // Costmap container
-    std::shared_ptr<nav_msgs::msg::OccupancyGrid> costmap_msg_;
+    nav_msgs::msg::OccupancyGrid::SharedPtr costmap_msg_;
 
     // Inflation parameters
     double inflation_radius_;
     int max_cost_;
-
-    // Helper functions
-    void convertToGrid(double x, double y, int& grid_x, int& grid_y);
-    void markObstacle(int grid_x, int grid_y);
-    void inflateObstacles(int grid_x, int grid_y);
 };
 
 }  
