@@ -1,7 +1,11 @@
 # WATonomous ASD Admissions Assignment
 
 ### Setup
-Setting up the monorepo on my own PC didn't work (MacOS arm64), so I used [WATcloud for interactive development](https://wiki.watonomous.ca/autonomous_software_general/watcloud_dev/). Helper script to start up remote connection to `derek3-ubuntu2`:
+Setting up the monorepo on my own PC didn't work (MacOS arm64), so I used [WATcloud for interactive development](https://wiki.watonomous.ca/autonomous_software_general/watcloud_dev/). 
+<br>
+Always run UWaterloo VPN
+<br>
+Helper script to start up remote connection to `derek3-ubuntu2`:
 
 ```
 cd wato_asd_tooling   
