@@ -1,3 +1,17 @@
-# costmap_node:
-#   ros__parameters:
+costmap_node:
+  ros__parameters:
+    costmap:
+      resolution: 0.40 # Resolution of the costmap in meters per cell
+      width: 120 # Width of the costmap in cells
+      height: 120 # Height of the costmap in cells
+      origin:
+        position:
+          x: -24.0 # X coordinate of the origin of the costmap in meters
+          y: -24.0 # Y coordinate of the origin of the costmap in meters
+        orientation:
+          w: 1.0 # Orientation of the costmap in quaternion format
+      
+      
+      inflation_radius: 1.5 # Inflation radius for obstacles in meters
+      max_cost: 100
 

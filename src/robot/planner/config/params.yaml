@@ -1,3 +1,4 @@
-# planner_node:
-#   ros__parameters:
-    
+planner_node:
+  ros__parameters:
+    goal_tolerance: 1.5
+    plan_timeout_seconds: 60.0

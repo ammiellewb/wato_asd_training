@@ -1,3 +1,6 @@
-# control_node:
-#   ros__parameters:
-    
+control_node:
+  ros__parameters:
+    lookahead_distance: 1.5 # m
+    steering_gain: 1.5 # rad/ms
+    max_steering_angle: 0.5 # rad
+    linear_velocity: 1.0 # m/s
