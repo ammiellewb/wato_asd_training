@@ -3,7 +3,7 @@
 ### Setup
 Setting up the monorepo on my own PC didn't work (MacOS arm64), so I used [WATcloud for interactive development](https://wiki.watonomous.ca/autonomous_software_general/watcloud_dev/). 
 <br>
-Always run UWaterloo VPN
+Always run UWaterloo VPN.
 <br>
 Helper script to start up remote connection to `derek3-ubuntu2`:
 
