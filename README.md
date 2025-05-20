@@ -1,7 +1,7 @@
 # WATonomous ASD Admissions Assignment
 
 ### Setup
-Setting up the monorepo on my own PC didn't work (MacOS arm64), so I used [WATcloud for interactive development](https://wiki.watonomous.ca/autonomous_software_general/watcloud_dev/). 
+Setting up the monorepo on my own PC didn't work (MacOS arm64), so I used [WATcloud for interactive development](https://wiki.watonomous.ca/autonomous_software_general/watcloud_dev/) --> Still facing [compilation errors](https://github.com/ammiellewb/wato_asd_training/pull/2)
 <br>
 Always run UWaterloo VPN.
 <br>
