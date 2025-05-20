@@ -55,17 +55,17 @@ void MapMemoryNode::localCostmapCallback(const nav_msgs::msg::OccupancyGrid::Sha
   }
 
   // Check distance traveled since last update
-  if (!std::isnan(last_robot_x)) {
-    double dist = std::hypot(robot_x - last_robot_x, robot_y - last_robot_y);
+  if (!std::isnan(last_robot_x_)) {
+    double dist = std::hypot(robot_x_ - last_robot_x_, robot_y_ - last_robot_y_);
     if (dist < distance_threshold_meters_) {
       RCLCPP_INFO(this->get_logger(), "Distance traveled is less than threshold, skipping update.");
       return;
     }
   }
-  last_robot_x = robot_x;
-  last_robot_y = robot_y;
+  last_robot_x_ = robot_x_;
+  last_robot_y_ = robot_y_;
 
-  map_memory_.updateMapMemory(msg, robot_x, robot_y, robot_theta);
+  map_memory_.updateMapMemory(msg, robot_x_, robot_y_, robot_theta_);
 }
  
 void MapMemoryNode::odomCallback(const nav_msgs::msg::Odometry::SharedPtr msg) {

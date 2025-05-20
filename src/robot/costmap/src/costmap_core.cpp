@@ -7,7 +7,7 @@
 namespace robot
 {
 
-CostmapCore::CostmapCore(const rclcpp::Logger& logger) : costmap_msg_(std::make_shared<nav_msgs::msg::OccupancyGrid>(), logger_(logger)) {}
+CostmapCore::CostmapCore(const rclcpp::Logger& logger) : costmap_msg_(std::make_shared<nav_msgs::msg::OccupancyGrid>()), logger_(logger) {}
 
 void CostmapCore::initializeCostmap(double resolution, int width, int height, 
     geometry_msgs::msg::Pose origin, double inflation_radius, int max_cost)
@@ -25,9 +25,9 @@ void CostmapCore::initializeCostmap(double resolution, int width, int height,
   RCLCPP_INFO(logger_, "Costmap initialized with resolution: %f, width: %d, height: %d", resolution, width, height);
 }
 
-void CostmapCore::processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr& laser_scan) const
+void CostmapCore::processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr& laser_scan)
 {
-  // Clear the costmap
+  // Clear the costmapp
   std::fill(costmap_msg_->data.begin(), costmap_msg_->data.end(), 0);
 
   double angle = laser_scan->angle_min;
@@ -51,10 +51,6 @@ void CostmapCore::processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr&
           markObstacle(grid_x, grid_y);
         }
     }
-  }
-
-  for (const auto& [grid_x, grid_y] : obstacles) {
-    inflateObstacles(grid_x, grid_y);
   }
 
 }
@@ -82,14 +78,14 @@ void CostmapCore::markObstacle(int grid_x, int grid_y)
   costmap_msg_->data[index] = max_cost_; // Mark as occupied
 }
 
-void CostmapCore::inflateObstacles(int origin_x, int origin_y) const
+void CostmapCore::inflateObstacles(int origin_x, int origin_y)
 {
-  stdd::queue<std::pair<int, int>> queue;
-  queue.emplace({origin_x, origin_y});
+  std::queue<std::pair<int, int>> queue;
+  queue.emplace(origin_x, origin_y);
 
   int width = costmap_msg_->info.width;
   int height = costmap_msg_->info.height;
-  int resolution = costmap_msg_->info.resolution;
+  double resolution = costmap_msg_->info.resolution;
 
   std::vector<std::vector<bool>> visited(width, std::vector<bool>(height, false));
   visited[origin_y][origin_x] = true;

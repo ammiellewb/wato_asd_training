@@ -7,7 +7,7 @@ namespace robot
 
 MapMemoryCore::MapMemoryCore(const rclcpp::Logger& logger) : global_map_(std::make_shared<nav_msgs::msg::OccupancyGrid>()), logger_(logger) {}
 
-void MapMemoryCore::initializeMap(int width, int height, double resolution, geometry_msgs::msg::Pose origin) {
+void MapMemoryCore::initializeMapMemory(double resolution, int width, int height, geometry_msgs::msg::Pose origin) {
   global_map_->info.width = width;
   global_map_->info.height = height;
   global_map_->info.resolution = resolution;
@@ -27,8 +27,8 @@ void MapMemoryCore::updateMapMemory(nav_msgs::msg::OccupancyGrid::SharedPtr loca
 
   for (unsigned int i = 0; i < local_height; ++i) {
     for (unsigned int j = 0; j < local_width; ++j) {
-      int8_t local_cost = local_data[i * local_width + j];
-      if (local_cost < 0) continue;  // Skip unknown cells
+      int8_t occ_val = local_data[i * local_width + j];
+      if (occ_val < 0) continue;  // Skip unknown cells
 
       // Transform local cell coordinates to global map coordinates
       double local_cell_x = local_origin_x + (0.5+j) * local_res;
@@ -53,10 +53,11 @@ void MapMemoryCore::updateMapMemory(nav_msgs::msg::OccupancyGrid::SharedPtr loca
 
       // If global cell is -1, set it to 0
       int curr_global_cost = (static_cast<int>(global_cost) < 0) ? 0 : static_cast<int>(global_cost);
-      int local_cost = static_cast<int>(local_cost);
+      int local_cost = static_cast<int>(occ_val);
 
       // Merge by taking the maximum cost
-      global_cost = static_cast<int8_t>(std::max(curr_global_cost, local_cost));
+      int merged_cost = std::max(curr_global_cost, local_cost);
+      global_cost = static_cast<int8_t>(merged_cost);
     }
   }
 }
@@ -81,7 +82,7 @@ bool MapMemoryCore::robotToMap(double robot_x, double robot_y, int& map_x, int& 
   }
 }
 
-bool CostmapCore::in_grid(int map_x, int map_y)
+bool MapMemoryCore::in_grid(int map_x, int map_y)
 {
   return (map_x < 0 || map_x >= static_cast<int>(global_map_->info.width) ||
           map_y < 0 || map_y >= static_cast<int>(global_map_->info.height));

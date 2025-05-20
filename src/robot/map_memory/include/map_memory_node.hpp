@@ -42,14 +42,14 @@ class MapMemoryNode : public rclcpp::Node {
     int height_;
     geometry_msgs::msg::Pose origin_;
 
-    double update_distance_;
+    double distance_threshold_meters_;
 
     double robot_x_;
     double robot_y_;
     double robot_theta_;
 
-    double last_x_;
-    double last_y_;
+    double last_robot_x_;
+    double last_robot_y_;
 };
 
 #endif 

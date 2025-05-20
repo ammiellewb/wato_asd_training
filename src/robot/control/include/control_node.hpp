@@ -12,7 +12,7 @@ class ControlNode : public rclcpp::Node {
   public:
     ControlNode();
 
-    getParameters();
+    void getParameters();
 
     double quaternionToYaw(double x, double y, double z, double w);
 
@@ -30,7 +30,7 @@ class ControlNode : public rclcpp::Node {
     rclcpp::Subscription<nav_msgs::msg::Path>::SharedPtr path_sub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
 
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cm_vel_pub_;
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub_;
 
     // Timer
     rclcpp::TimerBase::SharedPtr timer_;

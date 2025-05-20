@@ -1,5 +1,7 @@
 #include "control_core.hpp"
 
+#include "rclcpp/rclcpp.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 #include <cmath>
 
 namespace robot
@@ -8,11 +10,11 @@ namespace robot
 ControlCore::ControlCore(const rclcpp::Logger& logger) 
   : path_(nav_msgs::msg::Path()), logger_(logger) {}
 
-void ControlCore::initControlCore(
+void ControlCore::initializeControlCore(
   double lookahead_distance,
   double max_steering_angle,
   double steering_gain,
-  double linear_velocity,
+  double linear_velocity
 ) {
   lookahead_distance_ = lookahead_distance;
   max_steering_angle_ = max_steering_angle;
@@ -30,7 +32,7 @@ bool ControlCore::isPathEmpty() {
   return path_.poses.empty();
 }
 
-geometry_msgs::Twist ControlCore::calculateControlCommand(
+geometry_msgs::msg::Twist ControlCore::computeControlCommand(
   double robot_x,
   double robot_y,
   double robot_theta
@@ -52,7 +54,7 @@ geometry_msgs::Twist ControlCore::calculateControlCommand(
   double delta_y = lookahead_y - robot_y;
 
   // Angle to lookahead point
-  double angle_to_lookahead = atan2(delta_y, delta_x);
+  double angle_to_lookahead = std::atan2(delta_y, delta_x);
 
   // Steering angle calculation (difference between robot's heading and lookahead point)
   // Normalize the angle to be within -pi to pi
@@ -88,12 +90,12 @@ unsigned int ControlCore::findLookaheadPoint(
   double robot_y,
   double robot_theta
 ) {
-  unsigned int closest_index = 0;
+  int closest_index = 0;
   double closest_distance = std::numeric_limits<double>::max();
   bool found_forward = false;
 
   // Loop through the path points to find the closest point to the robot
-  for (unsigned int i = 0; i < path_.poses.size(); ++i) {
+  for (size_t i = 0; i < path_.poses.size(); ++i) {
     double path_x = path_.poses[i].pose.position.x;
     double path_y = path_.poses[i].pose.position.y;
 
