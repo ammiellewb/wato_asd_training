@@ -16,7 +16,7 @@ class CostmapNode : public rclcpp::Node {
     void getParameters();
     
     // Send laser scan data to the costmap core and return the costmap
-    void laserScanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const;
+    void laserScanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
  
   private:
     robot::CostmapCore costmap_;

@@ -18,22 +18,21 @@ class CostmapCore {
       const geometry_msgs::msg::Pose origin, double inflation_radius, int max_cost);
       
     // Update the costmap with new laser scan data
-    void processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr& laser_scan) const;
+    void processLaserScan(const sensor_msgs::msg::LaserScan::SharedPtr& laser_scan);
     void convertToGrid(double x, double y, int& grid_x, int& grid_y);
     bool in_grid(int grid_x, int grid_y);
     void markObstacle(int grid_x, int grid_y);
 
     // Inflate the obstacles in the costmap which are within the inflation radius
-    void inflateObstacles(int origin_x, int origin_y) const;
+    void inflateObstacles(int origin_x, int origin_y);
 
     // Publish the costmap to a topic
     nav_msgs::msg::OccupancyGrid::SharedPtr publishCostmap() const;
 
   private:
-    rclcpp::Logger logger_;
-
-    // Costmap container
+  // Costmap container
     nav_msgs::msg::OccupancyGrid::SharedPtr costmap_msg_;
+    rclcpp::Logger logger_;
 
     // Inflation parameters
     double inflation_radius_;

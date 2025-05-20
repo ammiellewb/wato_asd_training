@@ -42,7 +42,7 @@ void CostmapNode::getParameters() {
 }
 
 // Callback function
-void CostmapNode::laserScanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const {
+void CostmapNode::laserScanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
   // Process the laser scan data and publish the costmap
   costmap_.processLaserScan(msg);
   nav_msgs::msg::OccupancyGrid costmap_msg = *costmap_.publishCostmap();
