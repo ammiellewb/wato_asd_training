@@ -17,5 +17,5 @@ bash start_interactive_session.sh
 ### Sources
 [Vehicle Path Tracking Using Pure Pursuit Controller](https://youtu.be/zMdoLO4kRKg?si=zeY8OYk_HT66--f1) <br>
 [A* Pathfinding (E01: algorithm explanation)](https://youtu.be/-L-WgKMFuhE?si=GfR-o8PJOSTe5Wzh)<br>
-[C++ Hpp Cpp](https://youtu.be/Mwm2j-DHPQE?si=wckp7JFcJ7SJLVen)
-🙏🏽 Solution came in clutch
+[C++ Hpp Cpp](https://youtu.be/Mwm2j-DHPQE?si=wckp7JFcJ7SJLVen) <br>
+Solution came in clutch 🙏🏽
